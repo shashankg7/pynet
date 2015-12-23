@@ -20,7 +20,7 @@ class tree(object):
 
     def tree_match(self, t1, t2, matched):
         # Computes the Simple Tree Matching distance between trees and
-        # stores the matching in "matched" list passed as argument
+        # stores the matching(in pairs of form (element1, element2) in "matched" list passed as argument
         if t1 is None or t2 is None:
             return 0
 
@@ -28,8 +28,8 @@ class tree(object):
             return 0
 
         flag = 0
-        #               Recording alignment as nodes are matched
-        # Bad for time complexity. Each call of tree_match calls this. Think
+        # Recording alignment as nodes are matched
+        # Not an elegant way, bad time complexity. Each call of tree_match calls this. Think
         # of some workaround for this.
         for matching in matched:
             if t1 in matching or t2 in matching:
