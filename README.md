@@ -11,8 +11,8 @@ Bing Liu and Yanhong Zhai. "NET - A System for Extracting Web Data from Flat and
 3. requests
 
 # Running Command
-From the folder net run the following command
-python net.py <URL> web / Standard mode, pass URL 
+From the folder net run the following command <br />
+python net.py <URL> web / Standard mode, pass URL  <br />
 python net.py </path/local/htmlpage.html> local /If you have html page saved on local disk
 
 # Future Work
