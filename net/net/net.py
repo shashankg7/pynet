@@ -1,6 +1,6 @@
 from lxml import etree
 from StringIO import StringIO
-from tree import tree as tr
+from tree import tree as tree
 import requests
 from lxml import html
 import json
@@ -12,30 +12,30 @@ class NET(object):
     def __init__(self, url, source= "web"):
         if source == "web":
             page = requests.get(url)
-            self.tree = html.fromstring(page.content)
-            self.tre = tr()
+            self.dom_tree = html.fromstring(page.content)
+            self.tree = tree()
             self.full_matching = {}
-            #print self.tre.get_size(self.tree)
+            #print self.tree.get_size(self.dom_tree)
             f = open("output.csv", "wb")
             self.writer = csv.writer(f)
 
         else:
-            self.tree = etree.parse(url).getroot()
-            self.tre = tr()
+            self.dom_tree = etree.parse(url).getroot()
+            self.tree = tree()
             self.full_matching = {}
             f = open("output.csv", "wb")
             self.writer = csv.writer(f)
 
 
     def net(self, Threshold=25):
-        self.traverse(self.tree, Threshold)
+        self.traverse(self.dom_tree, Threshold)
 
 
     def traverse(self, root, Threshold=25):
         # Using simple heuristic for base condition
         # TO-DO: Use different heuristics, as mentioned in paper or find
         #        emperically
-        if self.tre.get_depth(root) >= 3:
+        if self.tree.get_depth(root) >= 3:
             for child in root.getchildren():
                 self.traverse(child, Threshold)
             self.full_matching = {}
@@ -79,7 +79,7 @@ class NET(object):
                 if childF != childR:
                     # Keep matching of two trees
                     matched = []
-                    if self.tre.tree_match(childF, childR, matched) >= Threshold and track_matches[childR]!=1:
+                    if self.tree.tree_match(childF, childR, matched) >= Threshold and track_matches[childR]!=1:
                            #for matching in matched:
                            #     if matching[0].text.encode('utf-8') is not None and matching[1].text.encode('utf-8') is not None and matching[0].text.encode('utf-8').isspace() is False and matching[1].text.encode('utf-8').isspace () is False:
                            #         print "First item of matching", matching[0].text.encode('utf-8').strip(), "second item of matching", matching[1].text.encode('utf-8').strip()
