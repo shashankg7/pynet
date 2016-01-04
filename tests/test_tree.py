@@ -47,7 +47,6 @@ ans34 = ["c", "a"]
 ans13 = []
 ans14 = []
 
-trees = 
 class TestTreeMatch(unittest.TestCase):
 
     def test_tree_match(self):
