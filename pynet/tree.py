@@ -56,41 +56,7 @@ class tree(object):
 if __name__ == "__main__":
     # Add these to unittestcase in test folder
     parser = etree.HTMLParser()
-    s1 = """<root>
-            <a></a>
-            <b>
-                <c></c>
-                <d></d>
-            </b>
-            </root>
-    """
-    s5 = """<c> <b> <a> </a> </b> </c>"""
-    s6 = """<c><a></a> <b></b></c> """
-    s2 = """<root>
-            <e></e>
-            <b>
-                <c></c>
-                <d></d>
-            </b>
-            </root>
-    """
-    s3 = """<root>
-                <b></b>
-                <c></c>
-            </root>
-        """
-    s4 = """<root>
-                <c></c>
-            </root>
-        """
-
-    tree1 = etree.XML(s5)
-    tree2 = etree.XML(s6)
-    tree = tree()
-    print "===========  Testing  ========="
-    ans = []
-    print tree.tree_match(tree1, tree2, ans)
-    print ans
+   tree = tree()
     
     tree1 = etree.parse("../tests/test.html")
     print "==============================================="
