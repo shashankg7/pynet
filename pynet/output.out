@@ -1,0 +1,72 @@
+======================Dom Tree========================
+[<Element head at 0x7f7e7f960f80>, <Element body at 0x7f7e7f960fc8>]
+======================================================
+
+
+
+['net.py']
+
+
+
+{}
+tr
+  
+td
+  
+table
+  
+td
+  
+td
+  
+
+
+
+Smith
+Clinton
+50
+410
+Jill
+Hill
+------------TABLE-----------------
+[['Smith', 'Clinton'], ['50', '410'], ['Jill', 'Hill']]
+2 3
+
+
+
+{}
+div
+  
+table
+  
+td
+  
+td
+  
+tr
+  
+td
+  
+td
+  
+
+
+
+Smith
+Jackson
+Optinal1
+Optinal5
+Jill
+Janet
+50
+500
+------------TABLE-----------------
+[['Smith', 'Jackson'], ['Optinal1', 'Optinal5'], ['Jill', 'Janet'], ['50', '500']]
+2 4
+==================== Tree Travesal Time ==============
+0.001972
+======================================================
+
+
+
+{}

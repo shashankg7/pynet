@@ -1,0 +1,38 @@
+======================Dom Tree========================
+<Element html at 0x7f832096df38>
+
+
+
+['net.py']
+{}
+=======================After align------------------
+{<Element td at 0x7f83208f77a0>: [<Element td at 0x7f83208f7b48>], <Element tr at 0x7f83208f75a8>: [<Element tr at 0x7f83208f7638>], <Element td at 0x7f83208f78c0>: [<Element td at 0x7f83208f7830>], <Element table at 0x7f83208f72d8>: [<Element table at 0x7f83208f7320>], <Element td at 0x7f83208f7758>: [<Element td at 0x7f83208f77e8>]}
+50
+410
+Smith
+Clinton
+Jill
+Hill
+------------TABLE-----------------
+[['50', '410'], ['Smith', 'Clinton'], ['Jill', 'Hill']]
+2 3
+{}
+=======================After align------------------
+{<Element div at 0x7f83208f7200>: [<Element div at 0x7f83208f70e0>], <Element table at 0x7f83208f7638>: [<Element table at 0x7f83208f7320>], <Element td at 0x7f83208f7290>: [<Element td at 0x7f83208f73b0>], <Element td at 0x7f83208f7908>: [<Element td at 0x7f83208f7c68>], <Element tr at 0x7f83208f7830>: [<Element tr at 0x7f83208f7b48>], <Element td at 0x7f83208f77a0>: [<Element td at 0x7f83208f7368>], <Element td at 0x7f83208f73f8>: [<Element td at 0x7f83208f7c20>]}
+Smith
+Jackson
+Optinal1
+Optinal5
+Jill
+Janet
+50
+500
+------------TABLE-----------------
+[['Smith', 'Jackson'], ['Optinal1', 'Optinal5'], ['Jill', 'Janet'], ['50', '500']]
+2 4
+   ===== Tree Travesal Time =====    
+0.001853
+
+
+
+{}

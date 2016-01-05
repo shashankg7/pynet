@@ -15,7 +15,10 @@ class NET(object):
         f = open("output.csv", "wb")
         self.writer = csv.writer(f)
         self.tree = tree()
-        self.full_matching = {}
+        self.full_matching = {} #helpful to create table
+        
+        #log configuration
+        logging.basicConfig(filename = 'log.log', level = logging.INFO)
 
         if source == "web":
             try:
@@ -24,35 +27,37 @@ class NET(object):
                 print e
                 sys.exit(1)
             self.dom_tree = html.fromstring(page.content)
-            #print self.tree.get_size(self.dom_tree)
         else:
             self.dom_tree = etree.parse(url).getroot()
+
         print "======================Dom Tree========================"
-        print self.dom_tree
-        logging.basicConfig(filename = 'log.log', level = logging.INFO)
-        logging.info("dom tree size {0}".format(self.tree.get_size(self.dom_tree)))
-        logging.info(url)
-
-        #print self.dom_tree.root
+        print self.dom_tree.getchildren()
         print "======================================================"
+        print "\n\n"
 
+        #TODO add other relevant logging info
+        logging.info("url {0}".format(url))
+        logging.info("dom tree size {0}".format(self.tree.get_size(self.dom_tree)))
 
-    def net(self, Threshold=5):
+    def net(self, Threshold=3):
         start = time.clock()
         self.traverse(self.dom_tree, Threshold)
-        print "   ===== Tree Travesal Time =====    "
+        print "==================== Tree Travesal Time =============="
         print time.clock() - start
+        print "======================================================"
+        print "\n\n"
 
 
+    #TODO: Use different heuristics, as mentioned in paper or find emperically
     def traverse(self, root, Threshold=25):
-        # Using simple heuristic for base condition
-        # TO-DO: Use different heuristics, as mentioned in paper or find
-        #        emperically
+
         if self.tree.get_depth(root) >= 3:
             for child in root.getchildren():
                 self.traverse(child, Threshold)
+
             self.full_matching = {}
             self.match(root, Threshold)
+
             # Create a table structure to write in a file the data
             table = []
             for k,v in self.full_matching.iteritems():
@@ -66,6 +71,7 @@ class NET(object):
                                    temp.append(e.text.encode('utf-8').strip())
                     if len(temp)!=0:
                         table.append(temp)
+
             if len(table)!=0:
                 print "------------TABLE-----------------"
                 print table
@@ -107,34 +113,42 @@ class NET(object):
                            track_matches[childR] = 1
                            track_matches[childF] = 1
 
+    def print_dict(self, arg):
+        for node in arg:
+            print node.tag
+            print "  "
+        print "\n\n"
+
 
     def align_and_link(self, matching):
-        print "=================== before align ------------------"
-        print matching
-        print "----------------------------------------------------"
+        
+        self.print_dict(self.full_matching)
         print self.full_matching
+
         for matched in matching:
             if self.full_matching.has_key(matched[0]) is True:
                 self.full_matching[matched[0]].append(matched[1])
             else:
                 self.full_matching[matched[0]] = []
                 self.full_matching[matched[0]].append(matched[1])
-        print "=======================After align------------------"
-        print self.full_matching
+
+        self.print_dict(self.full_matching)
+        
+
+#TODO url don't work for some special character . eg., &, you need to input as \&
+# command line argument sequence url, source (only specify in case of web otherwise it's fine)
 
 if __name__ == "__main__":
-    # For testing passing local html file. Local or remote html controlled by
-    # source argument
-    net = NET('file:///home/mitesh/Documents/web data extraction/pynet/net/tests/test.html', source="local")
-    # command line argument sequence url, source (only specify in case of web otherwise it's fine)
+    
+    net = NET('file:////home/mitesh/Documents/web data extraction/pynet/tests/resources/test.html', source="local")
 
-    #TODO 
-    # url don't work for some special character . eg., &, you need to input as \&
-
+    """
     print sys.argv
     url, source = sys.argv[1:]
     print "url:",url, " source:",source
-    #net = NET(url, source)
+    net = NET(url, source)
+    """
+
     net.net()
     print net.full_matching
 
